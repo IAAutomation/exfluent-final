@@ -1,0 +1,175 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* =========================================================
+   Exfluent — soft, human, warm design system
+   No pure black / no pure white / no cold blue backgrounds.
+   Palette is warm cream, peach, blush, lavender, mint, ink-brown.
+   ========================================================= */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-blush: var(--blush);
+  --color-peach: var(--peach);
+  --color-coral: var(--coral);
+  --color-lavender: var(--lavender);
+  --color-mint: var(--mint);
+  --color-butter: var(--butter);
+  --color-rose: var(--rose);
+
+  /* keep legacy brand-* aliases so existing components don't break */
+  --color-brand-blue: var(--lavender);
+  --color-brand-orange: var(--peach);
+  --color-brand-red: var(--coral);
+  --color-brand-pink: var(--rose);
+  --color-brand-pink-soft: var(--blush);
+  --color-brand-peach: var(--peach);
+
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 1rem;
+
+  /* warm soft palette */
+  --cream:    oklch(0.975 0.018 75);     /* page background */
+  --ink:      oklch(0.28 0.03 40);        /* warm brown for text */
+  --blush:    oklch(0.92 0.04 20);
+  --peach:    oklch(0.86 0.085 55);
+  --coral:    oklch(0.78 0.13 30);
+  --rose:     oklch(0.80 0.11 10);
+  --lavender: oklch(0.82 0.07 305);
+  --mint:     oklch(0.87 0.07 165);
+  --butter:   oklch(0.93 0.08 95);
+
+  --background: oklch(0.97 0.022 70);     /* warm cream */
+  --foreground: var(--ink);
+  --card: oklch(0.99 0.012 80);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.99 0.012 80);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: oklch(0.985 0.018 75);
+  --secondary: oklch(0.94 0.03 60);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.94 0.022 70);
+  --muted-foreground: oklch(0.48 0.03 50);
+  --accent: var(--peach);
+  --accent-foreground: var(--ink);
+  --destructive: var(--coral);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.28 0.03 40 / 10%);
+  --input: oklch(0.28 0.03 40 / 14%);
+  --ring: var(--coral);
+}
+
+.dark {
+  --background: oklch(0.24 0.02 40);
+  --foreground: oklch(0.97 0.02 75);
+  --card: oklch(0.28 0.02 40);
+  --border: oklch(1 0 0 / 12%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { background-color: var(--color-background); color: var(--color-foreground); }
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    background-image:
+      radial-gradient(60% 50% at 10% 0%, oklch(0.88 0.09 35 / 0.55), transparent 60%),
+      radial-gradient(50% 50% at 90% 10%, oklch(0.84 0.08 320 / 0.45), transparent 60%),
+      radial-gradient(45% 45% at 50% 100%, oklch(0.88 0.07 165 / 0.4), transparent 60%);
+    background-attachment: fixed;
+  }
+  .font-display { font-family: var(--font-display); font-style: italic; letter-spacing: -0.02em; }
+}
+
+@utility chip {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--color-card) 80%, transparent);
+  backdrop-filter: blur(8px);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+@utility soft-card {
+  background: color-mix(in oklab, var(--color-card) 85%, transparent);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 1px 0 0 oklch(1 0 0 / 0.6) inset,
+    0 30px 60px -30px oklch(0.28 0.03 40 / 0.18);
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(oklch(0 0 0 / 0.05) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: multiply;
+    opacity: 0.3;
+  }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(2deg); }
+}
+@keyframes float-y-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(-3deg); }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@utility animate-float { animation: float-y 7s ease-in-out infinite; }
+@utility animate-float-slow { animation: float-y-slow 11s ease-in-out infinite; }
+@utility animate-spin-slow { animation: spin-slow 28s linear infinite; }
